@@ -70,7 +70,26 @@ const AuthPage = () => {
           </form>
         ) : (
           <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
-            {/* Sign-up form code remains unchanged */}
+            <div className="name-fields">
+              <input type="text" placeholder="First Name" required />
+              <input type="text" placeholder="Last Name" required />
+            </div>
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Confirm Password" required />
+            <input type="date" required />
+            <select required defaultValue="">
+              <option value="" disabled>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="text" placeholder="Location" required />
+            <button type="submit" className="auth-btn">
+              Sign Up
+            </button>
           </form>
         )}
       </div>

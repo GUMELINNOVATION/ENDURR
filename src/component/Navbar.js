@@ -1,13 +1,14 @@
 import { pageLink } from "../data";
 import { socialLink } from "../data";
-import logo from "../images/logo.svg";
+// import logo from "../images/";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-center">
         <div className="nav-header">
-          <img src={logo} className="nav-logo" alt="backroads" />
+          <h4 className="nav-logo">logo</h4>
+          {/* <img src="" className="nav-logo" alt="logo" /> */}
           <button type="button" className="nav-toggle" id="nav-toggle">
             <i className="fas fa-bars"></i>
           </button>

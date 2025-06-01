@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./index.css";
+import profileimg from "../images/download (2).png";
 
 const Dashboard = () => {
   const username = "Gumel";
@@ -12,7 +13,7 @@ const Dashboard = () => {
       {/* Top Bar */}
       <header className="dashboard-header">
         <img src="/logo.png" alt="Logo" className="dashboard-logo" />
-        <img src="/profile.jpg" alt="Profile" className="dashboard-avatar" />
+        <img src={profileimg} alt="Profile" className="dashboard-avatar" />
       </header>
 
       {/* Welcome Section */}

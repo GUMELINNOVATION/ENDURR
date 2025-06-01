@@ -11,6 +11,7 @@ import Testimonials from "./component/Testimonials";
 import Footer from "./component/Footer";
 import Dashboard from "./dashboard";
 import AuthPage from "./Auth-page/auth";
+import SchedulePage from "./dashboard/SchedulePage"; // Import your new page
 
 function Home() {
   return (
@@ -33,9 +34,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Auth-page/auth" element={<AuthPage />} />{" "}
-        {/* Added auth route */}
+        <Route path="/Auth-page/auth" element={<AuthPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/schedule/:date" element={<SchedulePage />} />{" "}
+        {/* New Route */}
       </Routes>
     </Router>
   );

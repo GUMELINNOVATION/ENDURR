@@ -3,7 +3,7 @@ import React from "react";
 
 const Seamless = () => {
   return (
-    <div className="seamless-container">
+    <div className="seamless-container" id="seamless">
       <header className="seamless-header">
         <h1>Seamless Fitness</h1>
         <p className="tagline">Achieve your gym goals effortlessly</p>

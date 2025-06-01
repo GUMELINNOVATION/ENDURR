@@ -14,13 +14,13 @@ export const pageLink = [
   },
   {
     id: 3,
-    href: "#services",
-    text: "services",
+    href: "#seamless",
+    text: "Seamless",
   },
   {
     id: 4,
-    href: "#tours",
-    text: "tours",
+    href: "#flexible",
+    text: "Futures",
   },
 ];
 

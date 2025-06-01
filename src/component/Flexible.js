@@ -1,8 +1,9 @@
 import React from "react";
+import image from "../images/flexible.jpeg"; // Adjust the path as necessary
 
 const Flexible = () => {
   return (
-    <div className="flexible-container">
+    <div className="flexible-container" id="flexible">
       <div className="flexible-content">
         <div className="flexible-text">
           <h1>Flexible Group Workouts with Endurr</h1>
@@ -80,10 +81,7 @@ const Flexible = () => {
         </div>
 
         <div className="flexible-image">
-          <img
-            src="https://images.unsplash.com/photo-1599058917769-8c05d5a2b6b0?auto=format&fit=crop&w=800&q=80"
-            alt="Group of people working out together online"
-          />
+          <img src={image} alt="Group of people working out together online" />
           <div className="image-overlay">
             <p>
               "The energy of group workouts with the flexibility of your

@@ -27,7 +27,7 @@ const Footer = () => {
         })}
       </ul>
       <p className="copyright">
-        copyright &copy; Backroads travel tours company
+        &copy; 2025 Gumel Innovation.
         <span id="date"></span> all rights reserved
       </p>
     </footer>

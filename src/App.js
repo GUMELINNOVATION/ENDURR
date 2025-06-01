@@ -9,7 +9,8 @@ import HowItWorks from "./component/HowItWorks";
 import FAQ from "./component/FAQ";
 import Testimonials from "./component/Testimonials";
 import Footer from "./component/Footer";
-import Dashboard from "./dashboard"; // assuming dashboard/index.js exports default
+import Dashboard from "./dashboard";
+import AuthPage from "./Auth-page/auth";
 
 function Home() {
   return (
@@ -32,6 +33,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Auth-page/auth" element={<AuthPage />} />{" "}
+        {/* Added auth route */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>

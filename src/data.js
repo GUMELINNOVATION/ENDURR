@@ -38,7 +38,7 @@ export const socialLink = [
   {
     id: 3,
     href: "https://www.twitter.com",
-    icon: "fab fa-squarespace",
+    icon: "fab fa-instagram",
   },
 ];
 

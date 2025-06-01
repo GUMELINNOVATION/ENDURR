@@ -11,9 +11,10 @@ const Hero = () => {
           Schedule your gym sessions, stay motivated, and crush your fitness
           goals together!
         </p>
-        <a href="#tours" className="btn hero-btn">
+
+        <Link to="./Auth-page/auth" className="btn hero-btn">
           Join for free
-        </a>
+        </Link>
 
         {/* Use Link for client-side navigation */}
         <Link to="/dashboard" className="btn hero-btn">

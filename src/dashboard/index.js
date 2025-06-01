@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./index.css";
+import { pageLink, socialLink } from "../data";
 import profileimg from "../images/download (2).png";
 
 const Dashboard = () => {
@@ -63,9 +64,34 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        &copy; 2025 Gumel Innovation. All rights reserved.
+      <footer className="section footer">
+        <ul className="footer-links">
+          {pageLink.map((link) => {
+            return (
+              <li key={link.id}>
+                <a href={link.href} className="footer-links">
+                  {link.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <ul className="footer-icons">
+          {socialLink.map((link) => {
+            const { id, href, icon } = link;
+            return (
+              <li key={id}>
+                <a href={href} className="footer-icon">
+                  <i className={icon}></i>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="copyright">
+          &copy; 2025 Gumel Innovation.
+          <span id="date"></span> all rights reserved
+        </p>
       </footer>
     </div>
   );

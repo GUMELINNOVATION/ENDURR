@@ -76,12 +76,6 @@ const Flexible = () => {
             >
               Schedule Your First Session
             </button>
-            <button
-              className="cta-button secondary"
-              aria-label="Browse upcoming workouts"
-            >
-              Browse Upcoming Workouts
-            </button>
           </div>
         </div>
 

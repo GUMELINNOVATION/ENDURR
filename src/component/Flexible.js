@@ -1,5 +1,4 @@
 import React from "react";
-import sessionImage from "../images/flexible.jpeg"; // Placeholder image, replace if needed
 
 const Flexible = () => {
   return (
@@ -13,9 +12,9 @@ const Flexible = () => {
             25, 50, and 75-minute sessions to finish daily chores (plants need
             watering?) or tackle bigger projects (let’s finish that thesis).
           </p>
-          <a href="#" className="explore-link">
+          {/* <a href="#" className="explore-link">
             Explore features
-          </a>
+          </a> */}
         </div>
 
         {/* RIGHT VISUAL SECTION */}

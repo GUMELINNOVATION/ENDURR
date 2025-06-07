@@ -12,7 +12,7 @@ const Seamless = () => {
           from your browser, on desktop or mobile. No additional downloads
           required.
         </p>
-        <a href="#">Explore features</a>
+        {/* <a href="#">Explore features</a> */}
       </div>
 
       <div className="features-section">

@@ -9,8 +9,9 @@ const Flexible = () => {
           <p className="tagline">FLEXIBLE</p>
           <h2 className="headline">Focus for a bit, or for a while.</h2>
           <p className="description">
-            25, 50, and 75-minute sessions to finish daily chores (plants need
-            watering?) or tackle bigger projects (let’s finish that thesis).
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
+            quisquam harum nam cumque temporibus explicabo dolorum sapiente odio
+            unde dolor?
           </p>
           {/* <a href="#" className="explore-link">
             Explore features
@@ -20,9 +21,8 @@ const Flexible = () => {
         {/* RIGHT VISUAL SECTION */}
         <div className="flexible-visual">
           <div className="duration-tabs">
-            <button className="tab active">25m</button>
-            <button className="tab">50m</button>
-            <button className="tab">75m</button>
+            <button className="tab active">30m</button>
+            <button className="tab">60m</button>
           </div>
 
           <div className="session-cards">

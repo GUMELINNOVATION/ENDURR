@@ -4,39 +4,50 @@ import React from "react";
 const Seamless = () => {
   return (
     <div className="seamless-container" id="seamless">
-      <header className="seamless-header">
-        <h1>Seamless Fitness</h1>
-        <p className="tagline">Achieve your gym goals effortlessly</p>
-      </header>
+      <div className="seamless-header">
+        <span className="tagline">Seamless</span>
+        <h1>Get stuff done, seamlessly</h1>
+        <p>
+          Book sessions, sync with your calendar, and join video calls directly
+          from your browser, on desktop or mobile. No additional downloads
+          required.
+        </p>
+        <a href="#">Explore features</a>
+      </div>
+
       <div className="features-section">
-        <h2>Seamless Features</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">💪</div>
-            <h3>Personalized Tracking</h3>
-            <p>Track your workouts and see your progress over time.</p>
+        <div className="feature-visual">
+          <div className="step">
+            <div className="step-icon">✔️</div>
+            <div className="step-text">Book your sessions</div>
           </div>
-          <div className="feature-card">
-            <div className="feature-icon">📊</div>
-            <h3>Data Visualization</h3>
-            <p>Clear charts show your strength and endurance improvements.</p>
+          <div className="step">
+            <div className="step-icon">🗓️</div>
+            <div className="step-text">Sync to your calendar</div>
           </div>
-          <div className="feature-card">
-            <div className="feature-icon">🏆</div>
-            <h3>Achievement Badges</h3>
-            <p>Earn rewards for hitting milestones and staying consistent.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">🔄</div>
-            <h3>Seamless Integration</h3>
-            <p>Syncs with your favorite fitness apps and wearables.</p>
+          <div className="step">
+            <div className="step-icon">➡️</div>
+            <div className="step-text">Join from your browser</div>
           </div>
         </div>
       </div>
 
-      <div className="cta-section">
-        <h2>Ready to Transform Your Fitness Journey?</h2>
-        <button className="btn cta-btn">Get Started Today</button>
+      <div className="stats-row">
+        <div className="stat-box" style={{ backgroundColor: "#e0ebe5" }}>
+          <div className="stat-icon">🕒</div>
+          <div className="stat-value">5 million+</div>
+          <div className="stat-label">completed sessions</div>
+        </div>
+        <div className="stat-box" style={{ backgroundColor: "#dbeafe" }}>
+          <div className="stat-icon">🎯</div>
+          <div className="stat-value">400 million+</div>
+          <div className="stat-label">minutes of focus</div>
+        </div>
+        <div className="stat-box" style={{ backgroundColor: "#fde2e2" }}>
+          <div className="stat-icon">🌍</div>
+          <div className="stat-value">150+ countries</div>
+          <div className="stat-label">user locations</div>
+        </div>
       </div>
     </div>
   );

@@ -1,92 +1,47 @@
 import React from "react";
-import image from "../images/flexible.jpeg"; // Adjust the path as necessary
+import sessionImage from "../images/flexible.jpeg"; // Placeholder image, replace if needed
 
 const Flexible = () => {
   return (
-    <div className="flexible-container" id="flexible">
-      <div className="flexible-content">
+    <div className="flexible-section" id="flexible">
+      <div className="flexible-wrapper">
+        {/* LEFT TEXT SECTION */}
         <div className="flexible-text">
-          <h1>Flexible Group Workouts with Endurr</h1>
-          <p className="intro-text">
-            Connect and workout with motivated people from anywhere in the world
-            at any time that works for you. Endurr makes group fitness flexible
-            and accessible.
+          <p className="tagline">FLEXIBLE</p>
+          <h2 className="headline">Focus for a bit, or for a while.</h2>
+          <p className="description">
+            25, 50, and 75-minute sessions to finish daily chores (plants need
+            watering?) or tackle bigger projects (let’s finish that thesis).
           </p>
-
-          <div className="feature-list">
-            <div className="feature-item">
-              <div className="feature-icon" aria-label="Clock emoji">
-                ⏰
-              </div>
-              <h3>Schedule On Your Terms</h3>
-              <p>
-                Choose the exact date and time that fits your schedule. Early
-                bird or night owl - we've got you covered.
-              </p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon" aria-label="Globe emoji">
-                🌎
-              </div>
-              <h3>Global Workout Community</h3>
-              <p>
-                Join or host sessions with fitness enthusiasts from different
-                time zones and cultures.
-              </p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon" aria-label="Repeat arrows emoji">
-                🔄
-              </div>
-              <h3>Adjustable Commitment</h3>
-              <p>
-                From one-time sessions to regular weekly meetups - control your
-                level of involvement.
-              </p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon" aria-label="Chat emoji">
-                💬
-              </div>
-              <h3>Real-Time Connection</h3>
-              <p>
-                Chat and motivate each other during workouts through our
-                integrated platform.
-              </p>
-            </div>
-          </div>
-
-          <div className="schedule-demo">
-            <h3>How Scheduling Works:</h3>
-            <ol>
-              <li>Select "Create Session" from your dashboard</li>
-              <li>Choose your workout type and difficulty level</li>
-              <li>Set your preferred date and time</li>
-              <li>Open it to the community or invite specific friends</li>
-              <li>Meet your workout partners at the scheduled time!</li>
-            </ol>
-          </div>
-
-          <div className="cta-buttons">
-            <button
-              className="cta-button primary"
-              aria-label="Schedule your first session"
-            >
-              Schedule Your First Session
-            </button>
-          </div>
+          <a href="#" className="explore-link">
+            Explore features
+          </a>
         </div>
 
-        <div className="flexible-image">
-          <img src={image} alt="Group of people working out together online" />
-          <div className="image-overlay">
-            <p>
-              "The energy of group workouts with the flexibility of your
-              schedule"
-            </p>
+        {/* RIGHT VISUAL SECTION */}
+        <div className="flexible-visual">
+          <div className="duration-tabs">
+            <button className="tab active">25m</button>
+            <button className="tab">50m</button>
+            <button className="tab">75m</button>
+          </div>
+
+          <div className="session-cards">
+            <div className="card small">
+              <p className="time">10:30am - 10:55am</p>
+              <p className="user">👤 Yui K.</p>
+              <div className="icons">✏️ ❌</div>
+            </div>
+            <div className="card medium">
+              <p className="time">4:00pm - 4:50pm</p>
+              <p className="user">👤 Marwan S.</p>
+              <div className="icons">✏️ ❌</div>
+            </div>
+            <div className="card large">
+              <p className="time">9:45pm - 11:00pm</p>
+              <p className="user">👤 Shefali A.</p>
+              <div className="icons">✏️ ❌</div>
+            </div>
           </div>
         </div>
       </div>

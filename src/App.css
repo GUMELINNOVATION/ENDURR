@@ -3,34 +3,40 @@
 Variables
 ===============
 */
-
 :root {
-  /* dark shades of primary color*/
-  --clr-primary-1: hsl(184, 91%, 17%);
-  --clr-primary-2: hsl(185, 84%, 25%);
-  --clr-primary-3: hsl(185, 81%, 29%);
-  --clr-primary-4: hsl(184, 77%, 34%);
+  /* dark shades of primary color - using darker greys */
+  --clr-primary-1: #1b1b1b; /* grey-900 */
+  --clr-primary-2: #2c2c2e; /* grey-850 */
+  --clr-primary-3: #3a3a3c; /* grey-800 */
+  --clr-primary-4: #444444; /* grey-700 */
+
   /* primary/main color */
-  --clr-primary-5: hsl(185, 62%, 45%);
+  --clr-primary-5: #53565a; /* grey-600 */
+
   /* lighter shades of primary color */
-  --clr-primary-6: hsl(185, 57%, 50%);
-  --clr-primary-7: hsl(184, 65%, 59%);
-  --clr-primary-8: hsl(184, 80%, 74%);
-  --clr-primary-9: hsl(185, 94%, 87%);
-  --clr-primary-10: hsl(186, 100%, 94%);
+  --clr-primary-6: #6e6e6e; /* grey-500 */
+  --clr-primary-7: #aeaeb2; /* grey-400 */
+  --clr-primary-8: #bbbcbc; /* grey-300 */
+  --clr-primary-9: #e7e7e7; /* grey-200 */
+  --clr-primary-10: #f5f5f5; /* grey-50 */
+
   /* darkest grey - used for headings */
-  --clr-grey-1: hsl(209, 61%, 16%);
-  --clr-grey-2: hsl(211, 39%, 23%);
-  --clr-grey-3: hsl(209, 34%, 30%);
-  --clr-grey-4: hsl(209, 28%, 39%);
+  --clr-grey-1: #1b1b1b;
+  --clr-grey-2: #2c2c2e;
+  --clr-grey-3: #3a3a3c;
+  --clr-grey-4: #444444;
+
   /* grey used for paragraphs */
-  --clr-grey-5: hsl(210, 22%, 49%);
-  --clr-grey-6: hsl(209, 23%, 60%);
-  --clr-grey-7: hsl(211, 27%, 70%);
-  --clr-grey-8: hsl(210, 31%, 80%);
-  --clr-grey-9: hsl(212, 33%, 89%);
-  --clr-grey-10: hsl(210, 36%, 96%);
-  --clr-white: #fff;
+  --clr-grey-5: #53565a;
+  --clr-grey-6: #6e6e6e;
+  --clr-grey-7: #aeaeb2;
+  --clr-grey-8: #bbbcbc;
+  --clr-grey-9: #e7e7e7;
+  --clr-grey-10: #ebebeb;
+
+  --clr-white: #ffffff;
+  --clr-black: #000000;
+
   --ff-primary: "Lato", sans-serif;
   --transition: all 0.3s linear;
   --spacing: 0.25rem;
@@ -38,6 +44,7 @@ Variables
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
 /*
 =============== 
 Global Styles
@@ -855,119 +862,129 @@ Footer
     justify-content: center;
   }
 }
-
 /*
 =============== 
 Navbar
 ===============
 */
-/* add :not(.nav-logo) to img */
 
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--clr-white);
+  background: black; /* Black navbar */
   box-shadow: var(--dark-shadow);
   z-index: 2;
   height: 4rem;
   display: flex;
   align-items: center;
 }
+
 .nav-icons {
   display: none;
 }
+
 .nav-center {
   width: 90vw;
   max-width: 1170px;
   margin: 0 auto;
 }
+
 .nav-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .nav-toggle {
   background: transparent;
   border: none;
   outline: none;
   font-size: 1.5rem;
-  color: var(--clr-primary-5);
+  color: var(--clr-white);
   cursor: pointer;
   transition: var(--transition);
 }
+
 .nav-toggle:hover {
   transform: scale(1.2);
 }
+
 .nav-link {
   display: block;
   padding: 1rem 2rem;
   text-transform: capitalize;
   letter-spacing: var(--spacing);
   transition: var(--transition);
-  color: var(--clr-grey-1);
+  color: var(--clr-white); /* White text for black background */
   cursor: pointer;
   font-size: 1rem;
 }
+
 .nav-link:hover {
-  color: var(--clr-primary-1);
-  background: var(--clr-primary-8);
+  color: var(--clr-primary-5); /* Highlight color */
+  background: rgba(255, 255, 255, 0.1); /* Subtle hover background */
   padding-left: 2.25rem;
 }
+
 /* nav toggle functionality */
 .nav-links {
   height: 0;
   overflow: hidden;
   transition: var(--transition);
 }
+
 .show-links {
   height: 280px;
 }
+
 /* nav at bigger screen size */
 @media screen and (min-width: 992px) {
-  /* hide nav toggle button */
   .nav-toggle {
     display: none;
   }
-  /* show links */
+
   .nav-links {
     height: auto;
     display: flex;
   }
+
   .nav-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* optional */
     flex-wrap: wrap;
   }
+
   .nav-header {
-    padding: 0 0;
+    padding: 0;
   }
+
   .nav-link {
-    padding: 0 0;
+    padding: 0;
+    margin-right: 0.7rem;
   }
+
   .nav-link:hover {
     padding: 0;
     color: var(--clr-primary-5);
     background: transparent;
   }
+
   .nav-icons {
     display: flex;
   }
 
-  .nav-link {
-    margin-right: 0.7rem;
-  }
   .nav-icon {
     margin-right: 0.7rem;
     color: var(--clr-primary-5);
     font-size: 1.2rem;
     transition: var(--transition);
   }
+
   .nav-icon:hover {
-    color: var(--clr-primary-8);
+    color: var(--clr-primary-6);
   }
 }
 /* FAQ.css */

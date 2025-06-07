@@ -9,9 +9,9 @@ import HowItWorks from "./component/HowItWorks";
 import FAQ from "./component/FAQ";
 import Testimonials from "./component/Testimonials";
 import Footer from "./component/Footer";
-import Dashboard from "./dashboard";
+
 import AuthPage from "./Auth-page/auth";
-import SchedulePage from "./dashboard/SchedulePage"; // Import your new page
+// import SchedulePage from "./dashboard/SchedulePage"; // FIXED: Uncommented this
 
 function Home() {
   return (
@@ -35,9 +35,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Auth-page/auth" element={<AuthPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/schedule/:date" element={<SchedulePage />} />{" "}
-        {/* New Route */}
+
+        {/* <Route path="/schedule/:date" element={<SchedulePage />} /> */}
       </Routes>
     </Router>
   );

@@ -1,17 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./component/Navbar";
-import Hero from "./component/Hero";
-import About from "./component/About";
-import Seamless from "./component/Seamless";
-import Flexible from "./component/Flexible";
-import HowItWorks from "./component/HowItWorks";
-import FAQ from "./component/FAQ";
-import Testimonials from "./component/Testimonials";
-import Footer from "./component/Footer";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Seamless from "./components/Seamless";
+import Flexible from "./components/Flexible";
+import HowItWorks from "./components/HowItWorks";
+import FAQ from "./components/FAQ";
+import Testimonials from "./components/Testimonials";
+import Footer from "./components/Footer";
 
 import AuthPage from "./Auth-page/auth";
-// import SchedulePage from "./dashboard/SchedulePage"; // FIXED: Uncommented this
+import Dashboard from "./page/dashboard";
+import ScheduleWorkout from "./page/schedule-workout";
 
 function Home() {
   return (
@@ -34,9 +35,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Auth-page/auth" element={<AuthPage />} />
-
-        {/* <Route path="/schedule/:date" element={<SchedulePage />} /> */}
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/schedule-workout" element={<ScheduleWorkout />} />
       </Routes>
     </Router>
   );

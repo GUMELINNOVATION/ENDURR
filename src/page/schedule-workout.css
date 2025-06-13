@@ -1,0 +1,122 @@
+:root {
+  --clr-bg: rgba(44, 44, 46, 0.7);
+  --clr-card-bg: rgba(255, 255, 255, 0.05);
+  --clr-border: rgba(255, 255, 255, 0.2);
+  --clr-hover: rgba(255, 255, 255, 0.1);
+
+  --clr-white: #ffffff;
+  --clr-primary: #4f46e5;
+  --clr-input-bg: rgba(255, 255, 255, 0.08);
+
+  --ff-primary: "Lato", sans-serif;
+  --radius: 1rem;
+  --transition: all 0.3s ease;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: var(--ff-primary);
+  background: linear-gradient(135deg, #1b1b1b, #3a3a3c);
+  margin: 0;
+  padding: 2rem;
+  color: var(--clr-white);
+}
+
+.schedule-container {
+  backdrop-filter: blur(15px);
+  background: var(--clr-card-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 520px;
+  margin: auto;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.schedule-container:hover {
+  border-color: var(--clr-white);
+}
+
+.schedule-container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--clr-white);
+}
+
+.schedule-container form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Style for all inputs and selects */
+.schedule-container input,
+.schedule-container select {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-input-bg);
+  color: var(--clr-white);
+  font-size: 1rem;
+  transition: var(--transition);
+  appearance: none; /* Removes default arrow for select */
+  background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--clr-white) 50%
+    ),
+    linear-gradient(135deg, var(--clr-white) 50%, transparent 50%),
+    linear-gradient(to right, var(--clr-input-bg), var(--clr-input-bg));
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+.schedule-container input:focus,
+.schedule-container select:focus {
+  outline: none;
+  border-color: var(--clr-primary);
+  background: var(--clr-hover);
+  box-shadow: 0 0 8px var(--clr-primary);
+}
+
+/* Button style */
+.schedule-container button {
+  padding: 1rem;
+  background: var(--clr-primary);
+  color: var(--clr-white);
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.schedule-container button:hover {
+  background: #6366f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+/* Fix select background and text color */
+.schedule-container select {
+  background-color: var(--clr-input-bg); /* slightly translucent dark */
+  color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  padding-right: 2.5rem; /* space for arrow */
+}
+
+/* Option text color */
+.schedule-container select option {
+  background-color: #2c2c2e; /* dark background for options */
+  color: var(--clr-white);
+}
+
+/* When dropdown is open on some browsers, options inherit styles */
+.schedule-container select:focus option {
+  background-color: #3a3a3c;
+  color: var(--clr-white);
+}

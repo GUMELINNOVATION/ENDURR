@@ -12,11 +12,12 @@ const Hero = () => {
           goals together!
         </p>
 
-        <Link to="./Auth-page/auth" className="btn hero-btn">
+        {/* Correct path to auth route */}
+        <Link to="/auth" className="btn hero-btn">
           Join for free
         </Link>
 
-        {/* Use Link for client-side navigation */}
+        {/* Navigate to dashboard demo */}
         <Link to="/dashboard" className="btn hero-btn">
           Try demo
         </Link>

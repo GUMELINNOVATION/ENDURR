@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HowItWorks = () => {
   return (
@@ -47,7 +48,10 @@ const HowItWorks = () => {
           others — no matter where you are.
         </p>
         <div className="hiw-buttons">
-          <button className="hiw-btn primary">Sign Up Now</button>
+          {/* <button className="hiw-btn primary">Sign Up Now</button> */}
+          <Link to="/auth" className="hiw-btn primary">
+            Sign Up Now
+          </Link>
           <button className="hiw-btn secondary">Learn More</button>
         </div>
       </section>

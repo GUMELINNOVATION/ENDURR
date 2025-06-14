@@ -3,6 +3,7 @@ import "./dashboard.css";
 import { CalendarIcon, MenuIcon, XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { mockUsers, workoutEmojis, userData } from "./userdata";
+import UserMenu from "../components/UserMenu";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,8 +13,22 @@ const Dashboard = () => {
   const [upcomingWorkouts, setUpcomingWorkouts] = useState(
     userData.upcomingWorkouts
   );
-  const handleJoinWorkout = (id) => {
-    alert(`You joined workout ${id}`);
+  const handleJoinWorkout = (session) => {
+    const alreadyJoined = upcomingWorkouts.some((w) => w.id === session.id);
+    if (alreadyJoined) {
+      alert("You already joined this workout.");
+      return;
+    }
+
+    const newWorkout = {
+      id: session.id,
+      partnerName: session.user.name,
+      time: session.time,
+      activity: session.task,
+    };
+
+    setUpcomingWorkouts((prev) => [...prev, newWorkout]);
+    alert(`You joined ${session.user.name}'s workout at ${session.time}`);
   };
 
   const handleCancelWorkout = (id) => {
@@ -30,14 +45,7 @@ const Dashboard = () => {
       task: "any",
       duration: 60,
     },
-    {
-      id: 102,
-      user: mockUsers[0],
-      day: "Sun 15",
-      time: "8:00 AM",
-      task: "any",
-      duration: 60,
-    },
+
     {
       id: 103,
       user: mockUsers[0],
@@ -94,30 +102,6 @@ const Dashboard = () => {
       task: "any",
       duration: 60,
     },
-    {
-      id: 110,
-      user: mockUsers[4],
-      day: "Sat 14",
-      time: "4:00 PM",
-      task: "any",
-      duration: 60,
-    },
-    {
-      id: 111,
-      user: mockUsers[5],
-      day: "Sun 15",
-      time: "4:00 PM",
-      task: "any",
-      duration: 60,
-    },
-    {
-      id: 112,
-      user: mockUsers[6],
-      day: "Sun 15",
-      time: "5:00 PM",
-      task: "any",
-      duration: 60,
-    },
   ]);
 
   const currentUser = mockUsers.find((u) => u.id === 999);
@@ -147,15 +131,6 @@ const Dashboard = () => {
     return `${hour}:00 ${period}`;
   });
 
-  // // Convert 12-hour time string like "9:00 AM" to 24-hour integer hour (0-23)
-  // const getHour24 = (timeStr) => {
-  //   const [time, modifier] = timeStr.split(" ");
-  //   let [hour] = time.split(":").map(Number);
-  //   if (modifier === "PM" && hour !== 12) hour += 12;
-  //   if (modifier === "AM" && hour === 12) hour = 0;
-  //   return hour;
-  // };
-
   const [hoverSessionId, setHoverSessionId] = useState(null);
 
   return (
@@ -164,13 +139,7 @@ const Dashboard = () => {
         <div className="navbar-top">
           <h1 className="logo">Endurr</h1>
         </div>
-        <div>
-          <img
-            src={currentUser.avatar}
-            alt="Profile"
-            className="navbar-avatar"
-          />
-        </div>
+        <UserMenu currentUser={currentUser} />
       </div>
 
       <div className="calendar-header">
@@ -203,6 +172,11 @@ const Dashboard = () => {
 
       <div className="main-page">
         <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+          <div className="mobile-sidebar-close">
+            <button onClick={() => setSidebarOpen(false)}>
+              <XIcon size={24} />
+            </button>
+          </div>
           <div className="sidebar-header">
             <h2>💪</h2>
           </div>
@@ -364,9 +338,7 @@ const Dashboard = () => {
                                   className="join-btn"
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    alert(
-                                      `Joined ${session.user.name}'s workout at ${session.time}`
-                                    );
+                                    handleJoinWorkout(session); // ← now pass session object
                                   }}
                                 >
                                   Join
@@ -375,9 +347,11 @@ const Dashboard = () => {
                             )}
                           </div>
                         ))}
-                        {!cellSessions.some(
-                          (s) => s.user.id === currentUser.id
-                        ) && <div className="add-plus">+</div>}
+                        {
+                          !cellSessions.some(
+                            (s) => s.user.id === currentUser.id
+                          )
+                        }
                       </div>
                     );
                   })}

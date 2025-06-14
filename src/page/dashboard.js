@@ -3,13 +3,129 @@ import "./dashboard.css";
 import { CalendarIcon, MenuIcon, XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const mockUsers = [
+  { id: 1, name: "Juno Casimir", avatar: "https://i.pravatar.cc/40?img=10" },
+  { id: 2, name: "Sunny Y", avatar: "https://i.pravatar.cc/40?img=11" },
+  { id: 3, name: "Vittorio F.", avatar: "https://i.pravatar.cc/40?img=12" },
+  { id: 4, name: "Khalid Y.", avatar: "https://i.pravatar.cc/40?img=13" },
+  { id: 5, name: "Elisabeth G.", avatar: "https://i.pravatar.cc/40?img=14" },
+  { id: 6, name: "Vincy", avatar: "https://i.pravatar.cc/40?img=15" },
+  { id: 7, name: "Naveen K.", avatar: "https://i.pravatar.cc/40?img=16" },
+  { id: 999, name: "You", avatar: "https://i.pravatar.cc/40?img=65" },
+];
+
+const workoutEmojis = {
+  gym: "🏋️‍♀️",
+  run: "🏃‍♂️",
+  any: "✨",
+};
+
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState("gym");
   const [partnerPreference, setPartnerPreference] = useState("favorites");
   const [timeView, setTimeView] = useState("25m");
-  const [sessions, setSessions] = useState([]);
 
+  const [sessions, setSessions] = useState([
+    {
+      id: 101,
+      user: mockUsers[0],
+      day: "Sat 14",
+      time: "9:00 AM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 102,
+      user: mockUsers[0],
+      day: "Sun 15",
+      time: "8:00 AM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 103,
+      user: mockUsers[0],
+      day: "Sat 16",
+      time: "10:00 AM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 104,
+      user: mockUsers[0],
+      day: "Sun 15",
+      time: "10:00 AM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 105,
+      user: mockUsers[1],
+      day: "Sat 14",
+      time: "12:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 106,
+      user: mockUsers[1],
+      day: "Sat 14",
+      time: "1:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 107,
+      user: mockUsers[2],
+      day: "Sat 14",
+      time: "2:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 108,
+      user: mockUsers[3],
+      day: "Sat 14",
+      time: "2:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 109,
+      user: mockUsers[3],
+      day: "Sun 15",
+      time: "2:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 110,
+      user: mockUsers[4],
+      day: "Sat 14",
+      time: "4:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 111,
+      user: mockUsers[5],
+      day: "Sun 15",
+      time: "4:00 PM",
+      task: "any",
+      duration: 60,
+    },
+    {
+      id: 112,
+      user: mockUsers[6],
+      day: "Sun 15",
+      time: "5:00 PM",
+      task: "any",
+      duration: 60,
+    },
+  ]);
+
+  const currentUser = mockUsers.find((u) => u.id === 999);
   const navigate = useNavigate();
 
   const getNext7Days = () => {
@@ -20,10 +136,8 @@ const Dashboard = () => {
     for (let i = 0; i < 7; i++) {
       const date = new Date();
       date.setDate(today.getDate() + i);
-
       const day = daysOfWeek[date.getDay()];
       const dayOfMonth = date.getDate();
-
       next7Days.push(`${day} ${dayOfMonth}`);
     }
 
@@ -38,20 +152,47 @@ const Dashboard = () => {
     return `${hour}:00 ${period}`;
   });
 
-  const toggleSession = (day, time) => {
-    const exists = sessions.find((s) => s.day === day && s.time === time);
+  // // Convert 12-hour time string like "9:00 AM" to 24-hour integer hour (0-23)
+  // const getHour24 = (timeStr) => {
+  //   const [time, modifier] = timeStr.split(" ");
+  //   let [hour] = time.split(":").map(Number);
+  //   if (modifier === "PM" && hour !== 12) hour += 12;
+  //   if (modifier === "AM" && hour === 12) hour = 0;
+  //   return hour;
+  // };
+
+  const [hoverSessionId, setHoverSessionId] = useState(null);
+
+  const durationMap = {
+    "30m": 30,
+    "60m": 60,
+    Day: 60,
+  };
+
+  const scheduleSession = (day, time) => {
+    const exists = sessions.find(
+      (s) => s.user.id === currentUser.id && s.day === day && s.time === time
+    );
+
     if (exists) {
-      setSessions(sessions.filter((s) => !(s.day === day && s.time === time)));
+      setSessions(sessions.filter((s) => s.id !== exists.id));
     } else {
-      setSessions([...sessions, { day, time }]);
+      setSessions([
+        ...sessions,
+        {
+          id: Date.now(),
+          user: currentUser,
+          day,
+          time,
+          task: selectedTask,
+          duration: durationMap[timeView] || 30,
+        },
+      ]);
     }
   };
 
-  const todayDate = new Date();
-
   return (
     <div className="dashboard-container">
-      {/* Mobile Menu Button */}
       <button
         className="mobile-menu-btn"
         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -59,7 +200,6 @@ const Dashboard = () => {
         {sidebarOpen ? <XIcon size={20} /> : <MenuIcon size={20} />}
       </button>
 
-      {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <h1 className="logo">Endurr</h1>
         <button
@@ -78,7 +218,7 @@ const Dashboard = () => {
                 className={`tab ${selectedTask === task ? "active" : ""}`}
                 onClick={() => setSelectedTask(task)}
               >
-                {task === "gym" ? "🏋️‍♀️" : task === "run" ? "🏃‍♂️" : "✨"}{" "}
+                {workoutEmojis[task]}{" "}
                 {task.charAt(0).toUpperCase() + task.slice(1)}
               </button>
             ))}
@@ -110,7 +250,6 @@ const Dashboard = () => {
         <div className="footer">Privacy • Terms</div>
       </aside>
 
-      {/* Main Calendar View */}
       <main className="main-content">
         <div className="calendar-header">
           <div className="calendar-month">
@@ -132,6 +271,8 @@ const Dashboard = () => {
 
         <div className="calendar-grid">
           <div className="time-column">
+            {/* Blank space before first time label */}
+            <div className="time-cell blank-cell"></div>
             {times.map((time) => (
               <div key={time} className="time-cell">
                 {time}
@@ -142,11 +283,12 @@ const Dashboard = () => {
           {days.map((day) => {
             const dayNumber = parseInt(day.split(" ")[1], 10);
             const dayDate = new Date(
-              todayDate.getFullYear(),
-              todayDate.getMonth(),
+              new Date().getFullYear(),
+              new Date().getMonth(),
               dayNumber
             );
-            const isToday = dayDate.toDateString() === todayDate.toDateString();
+            const isToday =
+              dayDate.toDateString() === new Date().toDateString();
 
             return (
               <div key={day} className="day-column">
@@ -154,18 +296,51 @@ const Dashboard = () => {
                   {day}
                 </div>
                 {times.map((time, i) => {
-                  const scheduled = sessions.find(
+                  const cellSessions = sessions.filter(
                     (s) => s.day === day && s.time === time
                   );
+
                   return (
-                    <div
-                      key={i}
-                      className={`calendar-cell ${
-                        scheduled ? "scheduled" : ""
-                      }`}
-                      onClick={() => toggleSession(day, time)}
-                    >
-                      {scheduled ? "✓" : ""}
+                    <div key={i} className="calendar-cell">
+                      {cellSessions.map((session) => (
+                        <div
+                          key={session.id}
+                          className="session-avatar"
+                          onMouseEnter={() => setHoverSessionId(session.id)}
+                          onMouseLeave={() => setHoverSessionId(null)}
+                        >
+                          <img
+                            src={session.user.avatar}
+                            alt={session.user.name}
+                            className="avatar-img"
+                          />
+                          {hoverSessionId === session.id && (
+                            <div className="tooltip">
+                              <strong>{session.user.name}</strong>
+                              <p>
+                                {session.time} — {workoutEmojis[session.task]}{" "}
+                                {session.task.charAt(0).toUpperCase() +
+                                  session.task.slice(1)}
+                              </p>
+                              <p>Duration: {session.duration} min</p>
+                              <button
+                                className="join-btn"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  alert(
+                                    `Joined ${session.user.name}'s workout at ${session.time}`
+                                  );
+                                }}
+                              >
+                                Join
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                      {!cellSessions.some(
+                        (s) => s.user.id === currentUser.id
+                      ) && <div className="add-plus">+</div>}
                     </div>
                   );
                 })}

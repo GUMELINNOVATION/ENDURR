@@ -2,23 +2,7 @@ import React, { useState } from "react";
 import "./dashboard.css";
 import { CalendarIcon, MenuIcon, XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-const mockUsers = [
-  { id: 1, name: "Juno Casimir", avatar: "https://i.pravatar.cc/40?img=10" },
-  { id: 2, name: "Sunny Y", avatar: "https://i.pravatar.cc/40?img=11" },
-  { id: 3, name: "Vittorio F.", avatar: "https://i.pravatar.cc/40?img=12" },
-  { id: 4, name: "Khalid Y.", avatar: "https://i.pravatar.cc/40?img=13" },
-  { id: 5, name: "Elisabeth G.", avatar: "https://i.pravatar.cc/40?img=14" },
-  { id: 6, name: "Vincy", avatar: "https://i.pravatar.cc/40?img=15" },
-  { id: 7, name: "Naveen K.", avatar: "https://i.pravatar.cc/40?img=16" },
-  { id: 999, name: "You", avatar: "https://i.pravatar.cc/40?img=65" },
-];
-
-const workoutEmojis = {
-  gym: "🏋️‍♀️",
-  run: "🏃‍♂️",
-  any: "✨",
-};
+import { mockUsers, workoutEmojis } from "./userdata";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,7 +10,7 @@ const Dashboard = () => {
   const [partnerPreference, setPartnerPreference] = useState("favorites");
   const [timeView, setTimeView] = useState("25m");
 
-  const [sessions, setSessions] = useState([
+  const [sessions] = useState([
     {
       id: 101,
       user: mockUsers[0],
@@ -162,34 +146,6 @@ const Dashboard = () => {
   // };
 
   const [hoverSessionId, setHoverSessionId] = useState(null);
-
-  const durationMap = {
-    "30m": 30,
-    "60m": 60,
-    Day: 60,
-  };
-
-  const scheduleSession = (day, time) => {
-    const exists = sessions.find(
-      (s) => s.user.id === currentUser.id && s.day === day && s.time === time
-    );
-
-    if (exists) {
-      setSessions(sessions.filter((s) => s.id !== exists.id));
-    } else {
-      setSessions([
-        ...sessions,
-        {
-          id: Date.now(),
-          user: currentUser,
-          day,
-          time,
-          task: selectedTask,
-          duration: durationMap[timeView] || 30,
-        },
-      ]);
-    }
-  };
 
   return (
     <div className="dashboard-container">

@@ -1,3 +1,30 @@
+.dashboard-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--clr-white);
+  border-bottom: 1px solid var(--clr-grey-9);
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.dashboard-navbar .logo {
+  font-size: 1.25rem;
+  color: var(--clr-primary-1);
+  font-weight: 700;
+}
+
+.navbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--clr-primary-5);
+}
+
 /* General layout */
 .dashboard-container {
   display: flex;

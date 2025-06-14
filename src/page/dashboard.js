@@ -157,7 +157,6 @@ const Dashboard = () => {
       </button>
 
       <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <h1 className="logo">Endurr</h1>
         <button
           className="schedule-btn"
           onClick={() => navigate("/schedule-workout")}
@@ -207,6 +206,18 @@ const Dashboard = () => {
       </aside>
 
       <main className="main-content">
+        <div className="dashboard-navbar">
+          <div className="navbar-left">
+            <h1 className="logo">Endurr</h1>
+          </div>
+          <div className="navbar-right">
+            <img
+              src={currentUser.avatar}
+              alt="Profile"
+              className="navbar-avatar"
+            />
+          </div>
+        </div>
         <div className="calendar-header">
           <div className="calendar-month">
             <CalendarIcon className="icon" />

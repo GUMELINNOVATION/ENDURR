@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import "./dashboard.css";
 import { CalendarIcon, MenuIcon, XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { mockUsers, workoutEmojis } from "./userdata";
+import { mockUsers, workoutEmojis, userData } from "./userdata";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState("gym");
   const [partnerPreference, setPartnerPreference] = useState("favorites");
   const [timeView, setTimeView] = useState("25m");
+  const [upcomingWorkouts, setUpcomingWorkouts] = useState(
+    userData.upcomingWorkouts
+  );
+  const handleJoinWorkout = (id) => {
+    alert(`You joined workout ${id}`);
+  };
+
+  const handleCancelWorkout = (id) => {
+    const updated = upcomingWorkouts.filter((w) => w.id !== id);
+    setUpcomingWorkouts(updated);
+  };
 
   const [sessions] = useState([
     {
@@ -149,64 +160,140 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <button
-        className="mobile-menu-btn"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        {sidebarOpen ? <XIcon size={20} /> : <MenuIcon size={20} />}
-      </button>
+      <div className="dashboard-navbar">
+        <div className="navbar-top">
+          <h1 className="logo">Endurr</h1>
+        </div>
+        <div>
+          <img
+            src={currentUser.avatar}
+            alt="Profile"
+            className="navbar-avatar"
+          />
+        </div>
+      </div>
 
-      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <button
-          className="schedule-btn"
-          onClick={() => navigate("/schedule-workout")}
-        >
-          Schedule Workout
-        </button>
+      <div className="calendar-header">
+        <div className="calendar-month-and-menu">
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            {sidebarOpen ? <XIcon size={26} /> : <MenuIcon size={26} />}
+          </button>
 
-        <div className="section">
-          <p className="section-title">SESSION SETTINGS</p>
-          <div className="tab-group">
-            {["gym", "run", "any"].map((task) => (
-              <button
-                key={task}
-                className={`tab ${selectedTask === task ? "active" : ""}`}
-                onClick={() => setSelectedTask(task)}
-              >
-                {workoutEmojis[task]}{" "}
-                {task.charAt(0).toUpperCase() + task.slice(1)}
-              </button>
-            ))}
+          <div className="calendar-month">
+            <CalendarIcon className="icon" />
+            <span>June 2025</span>
           </div>
         </div>
 
-        <div className="tip-card">
-          💡 Tip: Enable "Quiet Mode" in settings to train silently or focus
-          solo.
+        <div className="time-buttons">
+          {["Day", "25m", "50m", "75m"].map((view) => (
+            <button
+              key={view}
+              className={`time-btn ${timeView === view ? "active" : ""}`}
+              onClick={() => setTimeView(view)}
+            >
+              {view}
+            </button>
+          ))}
         </div>
+      </div>
 
-        <div className="section">
-          <p className="section-title">PARTNER PREFERENCE</p>
-          <div className="partner-buttons">
-            {["favorites", "anyone"].map((pref) => (
-              <button
-                key={pref}
-                className={`partner-btn ${
-                  partnerPreference === pref ? "active" : ""
-                }`}
-                onClick={() => setPartnerPreference(pref)}
-              >
-                {pref.charAt(0).toUpperCase() + pref.slice(1)}
-              </button>
-            ))}
+      <div className="main-page">
+        <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+          <div className="sidebar-header">
+            <h2>💪</h2>
           </div>
-        </div>
 
-        <div className="footer">Privacy • Terms</div>
-      </aside>
+          <button
+            className="schedule-btn"
+            onClick={() => navigate("/schedule-workout")}
+          >
+            Schedule Workout
+          </button>
+          <div className="section">
+            <p className="section-title">📅 Upcoming Workouts</p>
 
-      <main className="main-content">
-        <div className="dashboard-navbar">
+            {upcomingWorkouts.length > 0 ? (
+              upcomingWorkouts.map((workout, index) => (
+                <div key={index} className="workout-card">
+                  <div className="workout-info">
+                    <p>
+                      <strong>Partner:</strong> {workout.partnerName}
+                    </p>
+                    <p>
+                      <strong>Time:</strong> {workout.time}
+                    </p>
+                    <p>
+                      <strong>Activity:</strong> {workout.activity}
+                    </p>
+                  </div>
+                  <div className="workout-actions">
+                    <button
+                      className="join-btn"
+                      onClick={() => handleJoinWorkout(workout.id)}
+                    >
+                      ✅ Join
+                    </button>
+                    <button
+                      className="cancel-btn"
+                      onClick={() => handleCancelWorkout(workout.id)}
+                    >
+                      ❌ Cancel
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="no-workouts">No upcoming workouts scheduled.</p>
+            )}
+          </div>
+
+          <div className="section">
+            <p className="section-title">🛠 Session Settings</p>
+            <div className="tab-group">
+              {["gym", "run", "any"].map((task) => (
+                <button
+                  key={task}
+                  className={`tab ${selectedTask === task ? "active" : ""}`}
+                  onClick={() => setSelectedTask(task)}
+                >
+                  {workoutEmojis[task]}{" "}
+                  {task.charAt(0).toUpperCase() + task.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="tip-card">
+            💡 Tip: Enable <strong>"Quiet Mode"</strong> in settings to train
+            silently or focus solo.
+          </div>
+
+          <div className="section">
+            <p className="section-title">👥 Partner Preference</p>
+            <div className="partner-buttons">
+              {["favorites", "anyone"].map((pref) => (
+                <button
+                  key={pref}
+                  className={`partner-btn ${
+                    partnerPreference === pref ? "active" : ""
+                  }`}
+                  onClick={() => setPartnerPreference(pref)}
+                >
+                  {pref === "favorites" ? "❤️ Favorites" : "🌐 Anyone"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="footer">🔒 Privacy • 📃 Terms</div>
+        </aside>
+
+        <main className="main-content">
+          {/* <div className="dashboard-navbar">
           <div className="navbar-left">
             <h1 className="logo">Endurr</h1>
           </div>
@@ -217,105 +304,89 @@ const Dashboard = () => {
               className="navbar-avatar"
             />
           </div>
-        </div>
-        <div className="calendar-header">
-          <div className="calendar-month">
-            <CalendarIcon className="icon" />
-            <span>June 2025</span>
-          </div>
-          <div className="time-buttons">
-            {["Day", "25m", "50m", "75m"].map((view) => (
-              <button
-                key={view}
-                className={`time-btn ${timeView === view ? "active" : ""}`}
-                onClick={() => setTimeView(view)}
-              >
-                {view}
-              </button>
-            ))}
-          </div>
-        </div>
+        </div> */}
 
-        <div className="calendar-grid">
-          <div className="time-column">
-            {/* Blank space before first time label */}
-            <div className="time-cell blank-cell"></div>
-            {times.map((time) => (
-              <div key={time} className="time-cell">
-                {time}
-              </div>
-            ))}
-          </div>
-
-          {days.map((day) => {
-            const dayNumber = parseInt(day.split(" ")[1], 10);
-            const dayDate = new Date(
-              new Date().getFullYear(),
-              new Date().getMonth(),
-              dayNumber
-            );
-            const isToday =
-              dayDate.toDateString() === new Date().toDateString();
-
-            return (
-              <div key={day} className="day-column">
-                <div className={`day-header ${isToday ? "today" : ""}`}>
-                  {day}
+          <div className="calendar-grid">
+            <div className="time-column">
+              {/* Blank space before first time label */}
+              <div className="time-cell blank-cell"></div>
+              {times.map((time) => (
+                <div key={time} className="time-cell">
+                  {time}
                 </div>
-                {times.map((time, i) => {
-                  const cellSessions = sessions.filter(
-                    (s) => s.day === day && s.time === time
-                  );
+              ))}
+            </div>
 
-                  return (
-                    <div key={i} className="calendar-cell">
-                      {cellSessions.map((session) => (
-                        <div
-                          key={session.id}
-                          className="session-avatar"
-                          onMouseEnter={() => setHoverSessionId(session.id)}
-                          onMouseLeave={() => setHoverSessionId(null)}
-                        >
-                          <img
-                            src={session.user.avatar}
-                            alt={session.user.name}
-                            className="avatar-img"
-                          />
-                          {hoverSessionId === session.id && (
-                            <div className="tooltip">
-                              <strong>{session.user.name}</strong>
-                              <p>
-                                {session.time} — {workoutEmojis[session.task]}{" "}
-                                {session.task.charAt(0).toUpperCase() +
-                                  session.task.slice(1)}
-                              </p>
-                              <p>Duration: {session.duration} min</p>
-                              <button
-                                className="join-btn"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  alert(
-                                    `Joined ${session.user.name}'s workout at ${session.time}`
-                                  );
-                                }}
-                              >
-                                Join
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                      {!cellSessions.some(
-                        (s) => s.user.id === currentUser.id
-                      ) && <div className="add-plus">+</div>}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </main>
+            {days.map((day) => {
+              const dayNumber = parseInt(day.split(" ")[1], 10);
+              const dayDate = new Date(
+                new Date().getFullYear(),
+                new Date().getMonth(),
+                dayNumber
+              );
+              const isToday =
+                dayDate.toDateString() === new Date().toDateString();
+
+              return (
+                <div key={day} className="day-column">
+                  <div className={`day-header ${isToday ? "today" : ""}`}>
+                    {day}
+                  </div>
+                  {times.map((time, i) => {
+                    const cellSessions = sessions.filter(
+                      (s) => s.day === day && s.time === time
+                    );
+
+                    return (
+                      <div key={i} className="calendar-cell">
+                        {cellSessions.map((session) => (
+                          <div
+                            key={session.id}
+                            className="session-avatar"
+                            onMouseEnter={() => setHoverSessionId(session.id)}
+                            onMouseLeave={() => setHoverSessionId(null)}
+                          >
+                            <img
+                              src={session.user.avatar}
+                              alt={session.user.name}
+                              className="avatar-img"
+                            />
+                            {hoverSessionId === session.id && (
+                              <div className="tooltip">
+                                <strong>{session.user.name}</strong>
+                                <p>
+                                  {session.time} — {workoutEmojis[session.task]}{" "}
+                                  {session.task.charAt(0).toUpperCase() +
+                                    session.task.slice(1)}
+                                </p>
+                                <p>Duration: {session.duration} min</p>
+                                <button
+                                  className="join-btn"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    alert(
+                                      `Joined ${session.user.name}'s workout at ${session.time}`
+                                    );
+                                  }}
+                                >
+                                  Join
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                        {!cellSessions.some(
+                          (s) => s.user.id === currentUser.id
+                        ) && <div className="add-plus">+</div>}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

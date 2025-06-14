@@ -15,3 +15,21 @@ export const workoutEmojis = {
   run: "🏃‍♂️",
   any: "✨",
 };
+export const userData = {
+  id: 999,
+  name: "John Doe",
+  upcomingWorkouts: [
+    {
+      id: 1,
+      partnerName: "Alex",
+      time: "Today, 5:00 PM",
+      activity: "Gym - Push Day",
+    },
+    {
+      id: 2,
+      partnerName: "Jamie",
+      time: "Tomorrow, 7:00 AM",
+      activity: "Run - 5K Park Route",
+    },
+  ],
+};

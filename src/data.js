@@ -1,45 +1,19 @@
 import React from "react";
 import { FaDumbbell, FaHeartbeat, FaUsers } from "react-icons/fa";
 
+// Example data structure
 export const pageLink = [
-  {
-    id: 1,
-    href: "#home",
-    text: "home",
-  },
-  {
-    id: 2,
-    href: "#about",
-    text: "about",
-  },
-  {
-    id: 3,
-    href: "#seamless",
-    text: "Seamless",
-  },
-  {
-    id: 4,
-    href: "#flexible",
-    text: "Futures",
-  },
+  { id: 1, href: "#home", text: "Home" },
+  { id: 2, href: "#about", text: "About" },
+  { id: 3, href: "#services", text: "Services" },
+  { id: 4, href: "#contact", text: "Contact" },
 ];
 
 export const socialLink = [
-  {
-    id: 1,
-    href: "https://www.twitter.com",
-    icon: "fab fa-facebook",
-  },
-  {
-    id: 2,
-    href: "https://www.twitter.com",
-    icon: "fab fa-twitter",
-  },
-  {
-    id: 3,
-    href: "https://www.twitter.com",
-    icon: "fab fa-instagram",
-  },
+  { id: 1, href: "https://facebook.com", icon: "fab fa-facebook-f" },
+  { id: 2, href: "https://twitter.com", icon: "fab fa-twitter" },
+  { id: 3, href: "https://instagram.com", icon: "fab fa-instagram" },
+  { id: 4, href: "https://youtube.com", icon: "fab fa-youtube" },
 ];
 
 export const seamless = [
